@@ -1,7 +1,7 @@
 {
     "name": "terminal42/contao-combinerbundle",
     "type": "contao-module",
-    "description": "Combine JavasScript and CSS files from the Contao backend.",
+    "description": "Combine JavaScript and CSS files from the Contao backend.",
     "license": "LGPL-3.0+",
     "authors":[
         {
@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "php": ">=5.4.0",
         "contao/core-bundle": "^4.0",
         "symfony/http-kernel": "^2.7"
     },
