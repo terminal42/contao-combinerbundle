@@ -1,0 +1,28 @@
+{
+    "name": "terminal42/contao-combinerbundle",
+    "type": "contao-module",
+    "description": "Combine JavasScript and CSS files from the Contao backend.",
+    "license": "LGPL-3.0+",
+    "authors":[
+        {
+            "name":"terminal42 gmbh",
+            "homepage":"http://terminal42.ch"
+        }
+    ],
+    "require": {
+        "contao/core-bundle": "^4.0",
+        "symfony/http-kernel": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Terminal42\\CombinerBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.0.x-dev"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
