@@ -2,7 +2,6 @@ services:
     terminal42_combiner.file_manager:
         class: Terminal42\CombinerBundle\FileManager
         arguments:
-            - "@database_connection"
             - "@contao.framework"
 
     terminal42_combiner.datacontainer.combiner:
