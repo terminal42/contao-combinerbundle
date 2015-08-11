@@ -4,13 +4,33 @@ namespace Terminal42\CombinerBundle\DataContainer;
 
 class Combiner
 {
-
+    /**
+     * @param array $row
+     *
+     * @return string
+     */
     public function listRecord($row)
     {
-        return sprintf(
-            '<div style="float:left">%s <span style="color:#b3b3b3;padding-left:3px">[%s]</span></div>',
-            $row['name'],
-            $GLOBALS['TL_LANG']['tl_combiner']['type'][$row['type']]
-        );
+        return $row['name'];
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function validateFiles($value)
+    {
+        $files = deserialize($value);
+
+        if (!empty($files) && is_array($files)) {
+            $combiner = new \Contao\Combiner();
+
+            foreach ($files as $file) {
+                $combiner->add($file);
+            }
+        }
+
+        return $value;
     }
 }

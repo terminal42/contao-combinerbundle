@@ -30,7 +30,12 @@ $GLOBALS['TL_DCA']['tl_combiner'] = array
             'fields'                  => array('name'),
             'panelLayout'             => 'search,limit',
             'headerFields'            => array('name', 'author', 'tstamp'),
-            'child_record_callback'   => array('\\Terminal42\\CombinerBundle\\DataContainer\\Combiner', 'listRecord'),
+            'child_record_callback'   => function ($row) {
+                return \System::getContainer()
+                    ->get('terminal42_combiner.datacontainer.combiner')
+                    ->listRecord($row)
+                ;
+            },
             'child_record_class'      => 'no_padding'
         ),
         'global_operations' => array
@@ -92,26 +97,27 @@ $GLOBALS['TL_DCA']['tl_combiner'] = array
     (
         'id' => array
         (
-            'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+            'sql'                     => "int(10) unsigned NOT NULL auto_increment",
         ),
         'pid' => array
         (
             'foreignKey'              => 'tl_theme.name',
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+            'relation'                => array('type'=>'belongsTo', 'load'=>'lazy'),
         ),
         'tstamp' => array
         (
-            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+            'sql'                     => "int(10) unsigned NOT NULL default '0'",
         ),
         'name' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_combiner']['name'],
             'exclude'                 => true,
             'search'                  => true,
+            'flag'                    => 1,
             'inputType'               => 'text',
             'eval'                    => ['mandatory'=>true, 'maxlength'=>255],
-            'sql'                     => "varchar(255) NOT NULL default ''"
+            'sql'                     => "varchar(255) NOT NULL default ''",
         ),
         'files' => array
         (
@@ -119,7 +125,20 @@ $GLOBALS['TL_DCA']['tl_combiner'] = array
             'exclude'                 => true,
             'inputType'               => 'listWizard',
             'eval'                    => ['mandatory'=>true, 'tl_class'=>'clr'],
-            'sql'                     => "blob NULL"
+            'sql'                     => "blob NULL",
+            'save_callback' => [
+                function ($value) {
+                    return \System::getContainer()
+                        ->get('terminal42_combiner.datacontainer.combiner')
+                        ->validateFiles($value)
+                    ;
+                }
+            ],
         ),
-    )
+        'cacheFile' => array
+        (
+            'eval'                    => ['doNotShow' => true, 'doNotCopy' => true],
+            'sql'                     => "varchar(255) NOT NULL default ''",
+        ),
+    ),
 );

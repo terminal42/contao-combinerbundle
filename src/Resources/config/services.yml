@@ -1,0 +1,31 @@
+services:
+    terminal42_combiner.file_manager:
+        class: Terminal42\CombinerBundle\FileManager
+        arguments:
+            - "@database_connection"
+            - "@contao.framework"
+
+    terminal42_combiner.datacontainer.combiner:
+        class: Terminal42\CombinerBundle\DataContainer\Combiner
+
+    terminal42_combiner.listener.dynamic_script_tags:
+        class: Terminal42\CombinerBundle\EventListener\DynamicScriptTagsListener
+        arguments:
+            - "@terminal42_combiner.file_manager"
+
+    terminal42_combiner.clearer.file_cache:
+        class: Terminal42\CombinerBundle\Cache\CombinerCacheClearer
+        public: false
+        arguments:
+            - "@database_connection"
+        tags:
+            - { name: kernel.cache_clearer }
+
+    terminal42_combiner.warmer.file_cache:
+        class: Terminal42\CombinerBundle\Cache\CombinerCacheWarmer
+        public: false
+        arguments:
+            - "@database_connection"
+            - "@terminal42_combiner.file_manager"
+        tags:
+            - { name: kernel.cache_warmer }
