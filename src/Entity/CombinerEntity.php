@@ -17,6 +17,6 @@ class CombinerEntity extends Model
     /**
      * @var string
      */
-    protected $strTable = 'tl_combiner';
+    protected static $strTable = 'tl_combiner';
 
 }
