@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/tl_theme.php" source-language="en">
+        <body>
+            <trans-unit id="tl_layout.combiners.0">
+                <source>Combiners</source>
+            </trans-unit>
+            <trans-unit id="tl_layout.combiners.1">
+                <source>Select the combiners to enable in this layout.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
