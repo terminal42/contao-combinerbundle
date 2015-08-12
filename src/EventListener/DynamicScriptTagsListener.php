@@ -42,7 +42,7 @@ class DynamicScriptTagsListener
 
             if (Combiner::CSS === $type) {
                 $GLOBALS['TL_CSS'][] = $file;
-            } elseif (Combiner::JS === $file) {
+            } elseif (Combiner::JS === $type) {
                 $GLOBALS['TL_JAVASCRIPT'][] = $file;
             }
         }
@@ -50,6 +50,10 @@ class DynamicScriptTagsListener
 
     private function removeFiles(&$files)
     {
+        if (empty($files) || !is_array($files)) {
+            return;
+        }
+
         $ids = $this->getCombinersInLayout();
 
         foreach ($ids as $id) {
